@@ -3,6 +3,7 @@
 CC=arm-linux-gnueabi-gcc
 LD=arm-linux-gnueabi-ld
 AS=arm-linux-gnueabi-as
+BINCPY=arm-linux-gnueabi-objcopy
 
 # Hey!, I am comment number 2. I want to say that CFLAGS will be the
 # options I'll pass to the compiler.
@@ -11,6 +12,7 @@ LDFLAGS=
 ASFLAGS=-mcpu=arm926ej-s -g
 
 all: main
+	$(BINCPY) -O binary main.elf main.bin
 
 main: main.o entry.o
 	$(LD) $(LDFLAGS) -T src/main.ld main.o entry.o -o main.elf
@@ -22,7 +24,7 @@ entry.o: src/entry.s
 	$(AS) $(ASFLAGS) src/entry.s -o entry.o
 
 clean:
-	rm -rf *o *.elf
+	rm -rf *o *.elf *~ *.bin
  
 # CC=g++
 # CFLAGS=-c -Wall
