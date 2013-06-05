@@ -3,7 +3,7 @@ SECTIONS
 {
  . = 0x0;
  .text : {
- entry.o (INTERRUPT_VECTOR)
+ startup.o (INTERRUPT_VECTOR)
  *(.text)
  }
  .data : { *(.data) }
